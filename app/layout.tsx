@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { DM_Sans, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
+import { loadSettings } from './api/settings/route'
 
 const dmSans = DM_Sans({
   subsets:  ['latin'],
@@ -94,15 +95,56 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = loadSettings()
+
   return (
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Preconnect to Google Fonts for faster load */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Google Search Console verification */}
+        {settings.googleSiteVerification && (
+          <meta name="google-site-verification" content={settings.googleSiteVerification} />
+        )}
+
+        {/* Google Analytics (GA4) */}
+        {settings.googleAnalyticsId && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${settings.googleAnalyticsId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.googleAnalyticsId}');`,
+              }}
+            />
+          </>
+        )}
+
+        {/* Meta Pixel */}
+        {settings.metaPixelId && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${settings.metaPixelId}');fbq('track','PageView');`,
+            }}
+          />
+        )}
+
+        {/* Custom head scripts */}
+        {settings.headScripts && (
+          <div dangerouslySetInnerHTML={{ __html: settings.headScripts }} />
+        )}
       </head>
       <body className={`${dmSans.variable} ${cormorant.variable}`}>
         {children}
+
+        {/* Custom body scripts */}
+        {settings.bodyScripts && (
+          <div dangerouslySetInnerHTML={{ __html: settings.bodyScripts }} />
+        )}
       </body>
     </html>
   )

@@ -79,7 +79,7 @@ export default function Hero() {
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     boxShadow: '0 2px 12px rgba(200,84,31,0.10)',
                   }}>
-                    <Icon name={icon} size={22} style={{ color: '#C8541F' }} />
+                    <Icon name={icon} size={22} className="text-[#C8541F]" />
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: '12px', fontWeight: 700, color: '#1A0E04', margin: 0, lineHeight: 1.3 }}>{label}</p>

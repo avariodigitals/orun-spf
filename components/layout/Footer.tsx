@@ -20,21 +20,22 @@ const QUICK_LINKS = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#1A0E04', color: 'white' }}>
+    <footer style={{ background: '#FEF9F2', color: '#1A0E04' }}>
 
       {/* ── Inline CSS for hover states (no JS event handlers needed) ── */}
       <style>{`
         .footer-link {
           font-size: 13px;
-          color: rgba(255,255,255,0.55);
+          font-weight: 600;
+          color: #7A5C3A;
           text-decoration: none;
           transition: color 0.2s;
         }
-        .footer-link:hover { color: #E8943A; }
+        .footer-link:hover { color: #C8541F; }
 
         .footer-wa-link {
           font-size: 13px;
-          color: #25D366;
+          color: #0d5c2e;
           text-decoration: none;
           font-weight: 600;
           transition: opacity 0.2s;
@@ -43,14 +44,15 @@ export default function Footer() {
 
         .footer-loc-link {
           font-size: 12px;
-          color: #E8943A;
+          font-weight: 600;
+          color: #C8541F;
           text-decoration: none;
           transition: opacity 0.2s;
         }
         .footer-loc-link:hover { opacity: 0.75; }
 
         .avario-link {
-          color: #E8943A;
+          color: #C8541F;
           font-weight: 600;
           text-decoration: underline;
           text-underline-offset: 2px;
@@ -70,9 +72,9 @@ export default function Footer() {
           {/* Brand col */}
           <div>
             <div style={{ marginBottom: '1rem' }}>
-              <OrunLogo size={42} dark={false} />
+              <OrunLogo size={42} dark={true} />
             </div>
-            <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', lineHeight: 1.7, maxWidth: '220px' }}>
+            <p style={{ color: '#7A5C3A', fontSize: '13px', fontWeight: 600, lineHeight: 1.7, maxWidth: '220px' }}>
               Premium broad spectrum sunscreen crafted for African skin. Protect. Glow. Thrive.
             </p>
             <div style={{ marginTop: '1.5rem' }}>
@@ -82,7 +84,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8943A', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C8541F', marginBottom: '1.25rem' }}>
               Quick Links
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -96,15 +98,15 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E8943A', marginBottom: '1.25rem' }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#C8541F', marginBottom: '1.25rem' }}>
               Order & Enquiries
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <MessageCircle size={14} style={{ color: '#25D366', flexShrink: 0, marginTop: '2px' }} />
+                <MessageCircle size={16} strokeWidth={2.5} style={{ color: '#0d5c2e', flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '2px' }}>WhatsApp Orders</p>
+                  <p style={{ fontSize: '12px', fontWeight: 600, color: '#7A5C3A', marginBottom: '2px' }}>WhatsApp Orders</p>
                   <a href="https://wa.me/2347072387362" target="_blank" rel="noopener noreferrer" className="footer-wa-link">
                     +234 707 238 7362
                   </a>
@@ -112,10 +114,10 @@ export default function Footer() {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <MapPin size={14} style={{ color: '#E8943A', flexShrink: 0, marginTop: '2px' }} />
+                <MapPin size={16} strokeWidth={2.5} style={{ color: '#C8541F', flexShrink: 0, marginTop: '2px' }} />
                 <div>
-                  <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', marginBottom: '2px' }}>Available In</p>
-                  <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)', marginBottom: '4px' }}>Lagos · Abuja · Port Harcourt</p>
+                  <p style={{ fontSize: '12px', fontWeight: 600, color: '#7A5C3A', marginBottom: '2px' }}>Available In</p>
+                  <p style={{ fontSize: '13px', fontWeight: 600, color: '#3D2B14', marginBottom: '4px' }}>Lagos · Abuja · Port Harcourt</p>
                   <a href="#stores" className="footer-loc-link">View all locations →</a>
                 </div>
               </div>
@@ -127,12 +129,12 @@ export default function Footer() {
       </div>
 
       {/* ── Trust strip ── */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', padding: '1.25rem 0' }}>
+      <div style={{ borderTop: '1px solid rgba(122,92,58,0.18)', padding: '1.25rem 0' }}>
         <div className="container-xl">
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem 2.5rem' }}>
             {BADGES.map(({ Icon, text }) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.35)', fontSize: '12px' }}>
-                <Icon size={12} strokeWidth={1.8} />
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#7A5C3A', fontSize: '12px', fontWeight: 600 }}>
+                <Icon size={14} strokeWidth={2.5} />
                 {text}
               </div>
             ))}
@@ -141,18 +143,18 @@ export default function Footer() {
       </div>
 
       {/* ── Legal bar ── */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '1rem 0' }}>
+      <div style={{ borderTop: '1px solid rgba(122,92,58,0.16)', padding: '1rem 0' }}>
         <div className="container-xl" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
+          <p style={{ fontSize: '12px', fontWeight: 600, color: '#7A5C3A', margin: 0 }}>
             © {new Date().getFullYear()} ORUN SPF. All rights reserved.
           </p>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
+          <p style={{ fontSize: '12px', fontWeight: 600, color: '#7A5C3A', margin: 0 }}>
             Created by{' '}
             <a href="https://avariodigitals.com" target="_blank" rel="noopener noreferrer" className="avario-link">
               Avario Digitals
             </a>
           </p>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.25)', margin: 0 }}>
+          <p style={{ fontSize: '12px', fontWeight: 600, color: '#7A5C3A', margin: 0 }}>
             Protect. Glow. Thrive.
           </p>
         </div>
