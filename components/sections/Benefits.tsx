@@ -15,7 +15,7 @@ export default function Benefits() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
-          style={{ maxWidth: '640px', marginBottom: '3rem' }}
+          style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3rem' }}
         >
           <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{BENEFITS.tag}</p>
           <h2
@@ -24,7 +24,7 @@ export default function Benefits() {
           >
             {BENEFITS.title}
           </h2>
-          <p style={{ color: '#7A5C3A', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: '520px' }}>
+          <p style={{ color: '#7A5C3A', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: '520px', margin: '0 auto' }}>
             {BENEFITS.desc}
           </p>
         </motion.div>
@@ -34,7 +34,7 @@ export default function Benefits() {
           display:             'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
           gap:                 '2.5rem 4rem',
-          alignItems:          'start',
+          alignItems:          'center',
         }}>
 
           {/* Checklist */}
@@ -66,8 +66,9 @@ export default function Benefits() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.55, delay: 0.2 }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}
           >
+
             {BENEFITS.cards.map((card) => (
               <div
                 key={card.title}

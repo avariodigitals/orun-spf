@@ -1,50 +1,7 @@
 'use client'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ShieldOff, ShieldCheck } from 'lucide-react'
 import WAButton from '@/components/ui/WAButton'
-
-// ──────────────────────────────────────────────────────────────
-//  BEFORE / AFTER — Results section, no emojis
-//  Drop real before.jpg / after.jpg into public/images/ to
-//  replace the styled placeholder cards below.
-// ──────────────────────────────────────────────────────────────
-
-const CARDS = [
-  {
-    tag:    'Before',
-    tagBg:  '#7A5C3A',
-    label:  'Unprotected Skin',
-    sub:    'Without daily SPF',
-    icon:   ShieldOff,
-    iconBg: '#EDDDBE',
-    iconColor: '#7A5C3A',
-    cardBg: 'linear-gradient(145deg, #e8d5b4 0%, #d4bc90 100%)',
-    accent: '#7A5C3A',
-    points: [
-      'Visible UV damage over time',
-      'Uneven, patchy skin tone',
-      'Dry and rough texture',
-      'Risk of hyperpigmentation',
-    ],
-  },
-  {
-    tag:    'After',
-    tagBg:  '#C8541F',
-    label:  'With ORUN SPF 50+',
-    sub:    '4 weeks of daily use',
-    icon:   ShieldCheck,
-    iconBg: 'rgba(200,84,31,0.12)',
-    iconColor: '#C8541F',
-    cardBg: 'linear-gradient(145deg, #F7EDD8 0%, #EDDDBE 100%)',
-    accent: '#C8541F',
-    points: [
-      'Even, radiant skin tone',
-      'Full UVA/UVB protection',
-      'Smooth, hydrated finish',
-      'Glowing, healthy complexion',
-    ],
-  },
-]
 
 export default function BeforeAfter() {
   return (
@@ -57,7 +14,7 @@ export default function BeforeAfter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: '3.5rem' }}
+          style={{ textAlign: 'center', marginBottom: '3rem' }}
         >
           <p className="label-tag" style={{ marginBottom: '0.75rem' }}>See the Difference</p>
           <h2
@@ -73,130 +30,49 @@ export default function BeforeAfter() {
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div style={{
-          display:             'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap:                 '1.5rem',
-          maxWidth:            '780px',
-          margin:              '0 auto',
-        }}>
-          {CARDS.map((card, i) => {
-            const IconComp = card.icon
-            return (
-              <motion.div
-                key={card.tag}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.55, delay: i * 0.15 }}
-                whileHover={{ scale: 1.015, boxShadow: '0 16px 48px rgba(0,0,0,0.1)' }}
-                style={{
-                  background:   'white',
-                  borderRadius: '1.5rem',
-                  overflow:     'hidden',
-                  border:       '1px solid rgba(237,221,190,0.7)',
-                  boxShadow:    '0 4px 20px rgba(0,0,0,0.06)',
-                  transition:   'box-shadow 0.3s ease, transform 0.3s ease',
-                }}
-              >
-                {/* Visual area */}
-                <div style={{
-                  height:         '200px',
-                  background:     card.cardBg,
-                  display:        'flex',
-                  alignItems:     'center',
-                  justifyContent: 'center',
-                  position:       'relative',
-                  overflow:       'hidden',
-                }}>
-                  {/* Decorative circle pattern */}
-                  <div style={{
-                    position:    'absolute',
-                    width:       '200px', height: '200px',
-                    borderRadius:'50%',
-                    border:      `2px solid rgba(255,255,255,0.3)`,
-                    top:         '-60px', right: '-60px',
-                  }} />
-                  <div style={{
-                    position:    'absolute',
-                    width:       '140px', height: '140px',
-                    borderRadius:'50%',
-                    border:      `2px solid rgba(255,255,255,0.2)`,
-                    bottom:      '-40px', left: '-30px',
-                  }} />
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          style={{
+            position:    'relative',
+            maxWidth:    '900px',
+            margin:      '0 auto',
+            borderRadius:'1.5rem',
+            overflow:    'hidden',
+            boxShadow:   '0 24px 64px rgba(0,0,0,0.14)',
+            aspectRatio: '16/9',
+          }}
+        >
+          <Image
+            src="/images/b45ter.png"
+            alt="Before and after ORUN SPF 50+ — real skin results"
+            fill
+            priority
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            sizes="900px"
+          />
 
-                  {/* Tag pill */}
-                  <div style={{
-                    position:     'absolute', top: '1rem', left: '1rem',
-                    background:   card.tagBg, color: 'white',
-                    borderRadius: '9999px', padding: '4px 14px',
-                    fontSize:     '11px', fontWeight: 700,
-                    letterSpacing:'0.12em', textTransform: 'uppercase',
-                  }}>
-                    {card.tag}
-                  </div>
+          {/* Without label */}
+          <div style={{
+            position: 'absolute', bottom: '1.5rem', left: '1.5rem',
+            background: 'rgba(42,24,8,0.78)', backdropFilter: 'blur(8px)',
+            color: 'white', borderRadius: '9999px', padding: '8px 18px',
+            fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
+            textTransform: 'uppercase', pointerEvents: 'none',
+          }}>Without</div>
 
-                  {/* Icon in circle — replaces emoji */}
-                  <div style={{
-                    width:           '80px', height: '80px',
-                    borderRadius:    '50%',
-                    background:      card.iconBg,
-                    border:          `2px solid rgba(255,255,255,0.5)`,
-                    display:         'flex',
-                    alignItems:      'center',
-                    justifyContent:  'center',
-                    backdropFilter:  'blur(4px)',
-                  }}>
-                    <IconComp size={36} color={card.iconColor} strokeWidth={1.5} />
-                  </div>
-
-                  {/* Swap the div above for real photos when available:
-                  <Image
-                    src={`/images/${card.tag.toLowerCase()}.jpg`}
-                    alt={card.label}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                  />
-                  */}
-                </div>
-
-                {/* Content */}
-                <div style={{ padding: '1.5rem' }}>
-                  <p style={{
-                    fontSize: '11px', fontWeight: 700, letterSpacing: '0.15em',
-                    textTransform: 'uppercase', color: card.accent,
-                    marginBottom: '6px', marginTop: 0,
-                  }}>
-                    {card.tag}
-                  </p>
-                  <h3 style={{
-                    fontFamily: 'Georgia, serif', fontSize: '1.2rem',
-                    fontWeight: 700, color: '#1A0E04',
-                    marginBottom: '4px', marginTop: 0,
-                  }}>
-                    {card.label}
-                  </h3>
-                  <p style={{ fontSize: '12px', color: '#7A5C3A', marginBottom: '1.1rem', marginTop: 0 }}>
-                    {card.sub}
-                  </p>
-
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {card.points.map((pt) => (
-                      <li key={pt} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13.5px', color: '#3D2B14' }}>
-                        <span style={{
-                          width: '6px', height: '6px', borderRadius: '50%',
-                          background: card.accent, flexShrink: 0,
-                        }} />
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
+          {/* With label */}
+          <div style={{
+            position: 'absolute', bottom: '1.5rem', right: '1.5rem',
+            background: '#C8541F', color: 'white',
+            borderRadius: '9999px', padding: '8px 18px',
+            fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
+            textTransform: 'uppercase', pointerEvents: 'none',
+          }}>With</div>
+        </motion.div>
 
         {/* CTA block */}
         <motion.div

@@ -50,7 +50,7 @@ export default function Texture() {
                 boxShadow: '0 24px 64px rgba(200,84,31,0.15)' }}
             >
               <Image
-                src="/images/logo-spf.png"
+                src="/images/litemage.png"
                 alt="ORUN SPF 50+ texture — lightweight, no white cast"
                 fill
                 style={{ objectFit: 'cover', objectPosition: 'center top' }}

@@ -20,7 +20,7 @@ const sizes: Record<Size, string> = {
 }
 
 const variants: Record<Variant, string> = {
-  green: 'bg-[#25D366] hover:bg-[#1eb358] text-white',
+  green: 'bg-[#0d5c2e] hover:bg-[#0a4620] text-white',
   white: 'bg-white hover:bg-brand-cream text-brand-orange',
   dark:  'bg-brand-dark hover:bg-brand-body text-white',
 }

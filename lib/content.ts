@@ -34,17 +34,17 @@ export const HERO = {
 
 // ── Trust bar ─────────────────────────────────────────────────
 export const TRUST_BAR = [
-  { icon: 'Award',       label: 'Dermatologist',   note: 'Inspired'          },
-  { icon: 'Sun',         label: 'SPF 50+',          note: 'Protection'        },
-  { icon: 'Zap',         label: 'Made for',         note: 'Tropical Sun'      },
-  { icon: 'ScanEye',     label: 'No White Cast',    note: 'For All Skin Tones'},
-  { icon: 'HeartPulse',  label: 'Safe for All',     note: 'Skin Types'        },
+  { icon: 'ShieldCheck', label: 'HIGH PROTECTION',  note: 'SPF 50+ PA+++'     },
+  { icon: 'Sun',         label: 'MADE FOR',         note: 'TROPICAL SUN'      },
+  { icon: 'ScanEye',     label: 'NO WHITE CAST',    note: 'FOR ALL SKIN TONES'},
+  { icon: 'Leaf',        label: 'CLEAN & SAFE',     note: 'INGREDIENTS'       },
+  { icon: 'HeartPulse',  label: 'SAFE FOR ALL',     note: 'SKIN TYPES'        },
 ]
 
 // ── Benefits ──────────────────────────────────────────────────
 export const BENEFITS = {
   tag:   'Trusted Protection',
-  title: 'Everyday\nConfidence',
+  title: 'Everyday Confidence',
   desc:  'ORUN SPF 50+ is a lightweight, non-greasy sunscreen that protects your skin from harsh UVA & UVB rays while keeping it hydrated, smooth and glowing all day.',
   list: [
     'Broad Spectrum UVA/UVB Protection',
