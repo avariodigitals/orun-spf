@@ -11,7 +11,7 @@ export const SITE = {
   brand:    'ORUN',
   product:  'SPF 50+ Sunscreen',
   whatsapp: '2347072387362',
-  message:  "Hi, I'd like to order ORUN SPF 50+.",
+  message:  "Hello , I am interested in your product. I would like to order ORUN SPF 50+.",
   get waLink() {
     return `https://wa.me/${this.whatsapp}?text=${encodeURIComponent(this.message)}`
   },
