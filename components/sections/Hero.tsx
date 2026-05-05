@@ -55,7 +55,9 @@ export default function Hero() {
             >
               Made for{' '}
               <span style={{ color: '#C8541F', fontWeight: 600, fontStyle: 'italic' }}>every</span> sun.
-              {' '}Made for{' '}
+              <br className="block md:hidden" />
+              <span className="hidden md:inline"> </span>
+              Made for{' '}
               <span style={{ color: '#C8541F', fontWeight: 600, fontStyle: 'italic' }}>every</span> skin.
             </motion.p>
 

@@ -21,7 +21,7 @@ export const SITE = {
 export const HERO = {
   badge:   'Broad Spectrum SPF 50+ Sunscreen',
   lines:   ['Protect.', 'Glow.', 'Thrive.'],
-  sub:     'Made for every sun. Made for every skin.',
+  sub:     'Made for African sun. Made for every skin.',
   ctaMain: 'Order on WhatsApp',
   ctaSub:  'See Why It Works',
   benefits: [

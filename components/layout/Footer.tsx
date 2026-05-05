@@ -20,7 +20,7 @@ const QUICK_LINKS = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#FEF9F2', color: '#1A0E04' }}>
+    <footer style={{ background: '#FEF9F2', color: '#1A0E04', overflowX: 'clip' }}>
 
       {/* ── Inline CSS for hover states (no JS event handlers needed) ── */}
       <style>{`
@@ -133,7 +133,21 @@ export default function Footer() {
         <div className="container-xl">
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem 2.5rem' }}>
             {BADGES.map(({ Icon, text }) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#7A5C3A', fontSize: '12px', fontWeight: 600 }}>
+              <div
+                key={text}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  color: '#7A5C3A',
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  minWidth: 0,
+                  flex: '1 1 220px',
+                  maxWidth: '320px',
+                  whiteSpace: 'normal',
+                }}
+              >
                 <Icon size={14} strokeWidth={2.5} />
                 {text}
               </div>
