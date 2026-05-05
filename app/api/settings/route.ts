@@ -78,19 +78,23 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json() as Partial<SiteSettings>
   const current = loadSettings()
+  const toStringValue = (v: unknown, fallback: string) => {
+    if (typeof v !== 'string') return fallback
+    return v.trim()
+  }
   const updated: SiteSettings = {
-    googleSiteVerification: body.googleSiteVerification ?? current.googleSiteVerification,
-    googleAnalyticsId: body.googleAnalyticsId ?? current.googleAnalyticsId,
-    metaPixelId: body.metaPixelId ?? current.metaPixelId,
-    headScripts: body.headScripts ?? current.headScripts,
-    bodyScripts: body.bodyScripts ?? current.bodyScripts,
-    smtpHost: body.smtpHost ?? current.smtpHost,
-    smtpPort: body.smtpPort ?? current.smtpPort,
+    googleSiteVerification: toStringValue(body.googleSiteVerification, current.googleSiteVerification),
+    googleAnalyticsId: toStringValue(body.googleAnalyticsId, current.googleAnalyticsId),
+    metaPixelId: toStringValue(body.metaPixelId, current.metaPixelId),
+    headScripts: typeof body.headScripts === 'string' ? body.headScripts : current.headScripts,
+    bodyScripts: typeof body.bodyScripts === 'string' ? body.bodyScripts : current.bodyScripts,
+    smtpHost: toStringValue(body.smtpHost, current.smtpHost),
+    smtpPort: toStringValue(body.smtpPort, current.smtpPort),
     smtpSecure: body.smtpSecure ?? current.smtpSecure,
-    smtpUser: body.smtpUser ?? current.smtpUser,
-    smtpPass: body.smtpPass ?? current.smtpPass,
-    smtpFrom: body.smtpFrom ?? current.smtpFrom,
-    siteUrl: body.siteUrl ?? current.siteUrl,
+    smtpUser: toStringValue(body.smtpUser, current.smtpUser),
+    smtpPass: toStringValue(body.smtpPass, current.smtpPass),
+    smtpFrom: toStringValue(body.smtpFrom, current.smtpFrom),
+    siteUrl: toStringValue(body.siteUrl, current.siteUrl),
   }
 
   saveSettings(updated)
