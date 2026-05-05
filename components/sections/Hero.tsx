@@ -9,12 +9,38 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden noise-overlay"
+      className="hero-mobile-bg relative min-h-screen flex items-center pt-20 overflow-hidden noise-overlay"
       style={{ background: `url('/images/myspf.png')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .hero-mobile-bg {
+            background-position: 68% top !important;
+            background-size: cover !important;
+          }
+
+          .hero-mobile-gradient {
+            background: linear-gradient(
+              180deg,
+              rgba(254, 249, 242, 0.9) 0%,
+              rgba(254, 249, 242, 0.78) 34%,
+              rgba(254, 249, 242, 0.58) 62%,
+              rgba(254, 249, 242, 0.26) 100%
+            );
+          }
+
+          .hero-secondary-mobile {
+            background-color: #ffffff !important;
+            color: #1A0E04 !important;
+            border-color: #ffffff !important;
+            box-shadow: 0 8px 22px rgba(26, 14, 4, 0.12);
+          }
+        }
+      `}</style>
 
       {/* Ambient blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="hero-mobile-gradient absolute inset-0 md:hidden" />
         <div className="absolute -top-32 -right-32 w-[700px] h-[700px] rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(232,148,58,0.14) 0%, transparent 70%)' }} />
         <div className="absolute bottom-0 -left-20 w-[500px] h-[500px] rounded-full"
@@ -99,7 +125,7 @@ export default function Hero() {
               transition={{ duration: 0.55, delay: 0.4 }}
             >
               <WAButton size="lg" label={HERO.ctaMain} />
-              <a href="#benefits" className="btn-outline">{HERO.ctaSub} →</a>
+              <a href="#benefits" className="btn-outline hero-secondary-mobile">{HERO.ctaSub} →</a>
             </motion.div>
           </div>
 

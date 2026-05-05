@@ -20,7 +20,7 @@ const QUICK_LINKS = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#FEF9F2', color: '#1A0E04', overflowX: 'clip' }}>
+    <footer id="site-footer" style={{ background: '#FEF9F2', color: '#1A0E04', overflowX: 'clip' }}>
 
       {/* ── Inline CSS for hover states (no JS event handlers needed) ── */}
       <style>{`
