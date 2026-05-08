@@ -1,14 +1,11 @@
-import fs from 'fs'
-import path from 'path'
 import { DEFAULT_CONTENT, type ContentSectionKey, type ContentSectionMap } from '@/lib/content'
-
-const CONTENT_DIR = path.join(process.cwd(), '.content')
+import { readPersistentJson, writePersistentJson } from '@/lib/persistent-json'
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function mergeContent<T>(defaults: T, saved: unknown): T {
+export function mergeContent<T>(defaults: T, saved: unknown): T {
   if (Array.isArray(defaults)) {
     return (Array.isArray(saved) ? saved : defaults) as T
   }
@@ -37,36 +34,28 @@ function mergeContent<T>(defaults: T, saved: unknown): T {
   return (saved ?? defaults) as T
 }
 
-export function getSectionContent<K extends ContentSectionKey>(section: K): ContentSectionMap[K] {
+export async function getSectionContent<K extends ContentSectionKey>(section: K): Promise<ContentSectionMap[K]> {
   const defaults = DEFAULT_CONTENT[section]
-  const contentFile = path.join(CONTENT_DIR, `${section}.json`)
-
-  if (!fs.existsSync(contentFile)) {
-    return defaults
-  }
-
-  try {
-    const fileContent = fs.readFileSync(contentFile, 'utf-8')
-    const savedContent = JSON.parse(fileContent) as unknown
-    return mergeContent(defaults, savedContent)
-  } catch (error) {
-    console.error(`Error reading content for ${section}:`, error)
-    return defaults
-  }
+  const savedContent = await readPersistentJson<unknown>(section, defaults)
+  return mergeContent(defaults, savedContent)
 }
 
-export function getHomepageContent() {
+export async function saveSectionContent<K extends ContentSectionKey>(section: K, value: unknown): Promise<void> {
+  await writePersistentJson(section, value)
+}
+
+export async function getHomepageContent() {
   return {
-    hero: getSectionContent('hero'),
-    trustBar: getSectionContent('trust-bar'),
-    benefits: getSectionContent('benefits'),
-    whyOrun: getSectionContent('why-orun'),
-    ingredients: getSectionContent('ingredients'),
-    texture: getSectionContent('texture'),
-    beforeAfter: getSectionContent('before-after'),
-    testimonials: getSectionContent('testimonials'),
-    stores: getSectionContent('stores'),
-    faq: getSectionContent('faq'),
-    finalCta: getSectionContent('final-cta'),
+    hero: await getSectionContent('hero'),
+    trustBar: await getSectionContent('trust-bar'),
+    benefits: await getSectionContent('benefits'),
+    whyOrun: await getSectionContent('why-orun'),
+    ingredients: await getSectionContent('ingredients'),
+    texture: await getSectionContent('texture'),
+    beforeAfter: await getSectionContent('before-after'),
+    testimonials: await getSectionContent('testimonials'),
+    stores: await getSectionContent('stores'),
+    faq: await getSectionContent('faq'),
+    finalCta: await getSectionContent('final-cta'),
   }
 }

@@ -4,33 +4,33 @@
   "items": [
     {
       "icon": "Sparkles",
-      "name": "Niacinamidedddddd",
+      "name": "Brightens and evens skin tone.",
       "bg": "#F9EFC7",
-      "desc": "Brightens and evens skin tone."
+      "desc": "3-O-Ethyl Ascorbic Acid (Vitamin C Derivative), Glycyrrhiza Glabra (Licorice) Root Extract, Scutellaria Baicalensis Root Extract, Polygonum Cuspidatum Root Extract, Camellia Sinensis Leaf Extract."
     },
     {
       "icon": "Droplets",
-      "name": "Hyaluronic Acid",
+      "name": "Deeply hydrates and plumps.",
       "bg": "#C9DEF5",
-      "desc": "Deeply hydrates and plumps."
-    },
-    {
-      "icon": "Leaf",
-      "name": "Vitamin E",
-      "bg": "#F5D9B8",
-      "desc": "Protects and nourishes skin."
-    },
-    {
-      "icon": "Sun",
-      "name": "Advanced UV Filters",
-      "bg": "#E8E8E8",
-      "desc": "Broad spectrum protection."
+      "desc": "Aqua, Glycerin, Butylene Glycol, Dipropylene Glycol, Aloe Barbadensis Leaf Extract, Caprylic/Capric Triglyceride, Butylene Glycol Dicaprylate/Dicaprate, Lecithin, Hydrogenated Lecithin, Ceramide NP"
     },
     {
       "icon": "Wind",
       "name": "Aloe Vera Extract",
       "bg": "#C8E6C9",
       "desc": "Soothes and calms skin."
+    },
+    {
+      "icon": "Sun",
+      "name": "Broad spectrum protection",
+      "bg": "#E8E8E8",
+      "desc": "Ethylhexyl Salicylate, Ethylhexyl Methoxycinnamate, Butyl Methoxydibenzoylmethane (Avobenzone), Octocrylene"
+    },
+    {
+      "icon": "Leaf",
+      "name": "Protects and nourishes skin.",
+      "bg": "#F5D9B8",
+      "desc": "Tocopheryl Acetate (Vitamin E), Ceramide NP, Caprylic/Capric Triglyceride, Rosa Rugosa Flower Oil, Camellia Sinensis Leaf Extract, Rosmarinus Officinalis (Rosemary) Leaf Extract, Glyceryl Stearate, Bisabolol"
     }
   ]
 }

@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
-import fs from 'fs'
-import path from 'path'
 import { DEFAULT_CONTENT } from '@/lib/content'
+import { getSectionContent, saveSectionContent } from '@/lib/content-store'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this'
-const CONTENT_DIR = path.join(process.cwd(), '.content')
 
 // Verify authentication
 async function verifyAuth() {
@@ -22,13 +20,6 @@ async function verifyAuth() {
     return true
   } catch {
     return false
-  }
-}
-
-// Ensure content directory exists
-function ensureContentDir() {
-  if (!fs.existsSync(CONTENT_DIR)) {
-    fs.mkdirSync(CONTENT_DIR, { recursive: true })
   }
 }
 
@@ -48,19 +39,7 @@ export async function GET(
       )
     }
 
-    ensureContentDir()
-    const contentFile = path.join(CONTENT_DIR, `${section}.json`)
-
-    let content = defaultContent[section]
-
-    if (fs.existsSync(contentFile)) {
-      try {
-        const fileContent = fs.readFileSync(contentFile, 'utf-8')
-        content = JSON.parse(fileContent)
-      } catch (error) {
-        console.error(`Error reading ${section}.json:`, error)
-      }
-    }
+    const content = await getSectionContent(section as keyof typeof DEFAULT_CONTENT)
 
     return NextResponse.json(content)
   } catch (error) {
@@ -97,10 +76,7 @@ export async function PUT(
 
     const body = await request.json()
 
-    ensureContentDir()
-    const contentFile = path.join(CONTENT_DIR, `${section}.json`)
-
-    fs.writeFileSync(contentFile, JSON.stringify(body, null, 2))
+    await saveSectionContent(section as keyof typeof DEFAULT_CONTENT, body)
 
     return NextResponse.json(
       { message: 'Content updated successfully', data: body },
@@ -109,7 +85,7 @@ export async function PUT(
   } catch (error) {
     console.error('Content update error:', error)
     return NextResponse.json(
-      { message: 'Internal server error' },
+      { message: error instanceof Error ? error.message : 'Internal server error' },
       { status: 500 }
     )
   }

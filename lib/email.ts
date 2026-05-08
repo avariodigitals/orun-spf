@@ -12,7 +12,7 @@ export async function sendNewUserEmail({
   password: string
   role: string
 }) {
-  const settings = loadSettings()
+  const settings = await loadSettings()
 
   if (
     !settings.smtpHost ||

@@ -96,8 +96,8 @@ export const metadata: Metadata = {
   themeColor: '#C8541F',     // orange — shows in mobile browser tab bar
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const settings = loadSettings()
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await loadSettings()
   const gaId = (settings.googleAnalyticsId || process.env.NEXT_PUBLIC_GA_ID || '').trim()
   const pixelId = (settings.metaPixelId || '').trim()
   const gscVerification = (settings.googleSiteVerification || '').trim()

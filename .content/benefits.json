@@ -1,0 +1,24 @@
+{
+  "tag": "Trusted Protection",
+  "title": "Everyday Confidence",
+  "desc": "ORUN SPF 50+ is is rich in various nutrients, moisturizing yet non-greasy and fast-absorbing. It provides broad-spectrum UVA and UVB protection, delivering long-lasting hydration while offering sun protection and preventing photoaging-making it perfect for daily skincare.",
+  "list": [
+    "Broad Spectrum UVA/UVB Protection",
+    "Lightweight & Fast Absorbing",
+    "No White Cast",
+    "Hydrating & Skin-Nourishing",
+    "Perfect for Daily Use"
+  ],
+  "cards": [
+    {
+      "icon": "Droplets",
+      "title": "Hydrating Formula",
+      "body": "Keeps your skin soft, fresh and radiant."
+    },
+    {
+      "icon": "Feather",
+      "title": "Lightweight & Non-Greasy",
+      "body": "Feels like skincare, protects like SPF."
+    }
+  ]
+}

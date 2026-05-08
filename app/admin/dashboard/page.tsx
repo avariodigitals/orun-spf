@@ -330,6 +330,7 @@ function SectionEditor({ section }: { section: SectionDef }) {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [saveError, setSaveError] = useState('')
   const [rawData, setRawData] = useState<Record<string, unknown>>({})
   const [values, setValues] = useState<Record<string, string>>({})
 
@@ -411,6 +412,7 @@ function SectionEditor({ section }: { section: SectionDef }) {
 
   useEffect(() => {
     let isMounted = true
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true)
 
     fetch(`/api/content/${section.id}`)
@@ -435,6 +437,7 @@ function SectionEditor({ section }: { section: SectionDef }) {
   }, [section.id, section.fields])
 
   const handleSave = async () => {
+    setSaveError('')
     setSaving(true)
     try {
       const payload = JSON.parse(JSON.stringify(rawData || {})) as Record<string, unknown>
@@ -459,7 +462,13 @@ function SectionEditor({ section }: { section: SectionDef }) {
         setRawData(payload)
         setSaved(true)
         setTimeout(() => setSaved(false), 2000)
+        return
       }
+
+      const result = await res.json().catch(() => ({ message: 'Failed to save changes' }))
+      setSaveError(result?.message || 'Failed to save changes')
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : 'Failed to save changes')
     } finally {
       setSaving(false)
     }
@@ -672,6 +681,7 @@ function SectionEditor({ section }: { section: SectionDef }) {
           {saving ? 'Saving...' : 'Save Changes'}
         </button>
         {saved && <span style={{ color: '#2F7D32', fontSize: '13px', fontWeight: 700 }}>Saved</span>}
+        {!!saveError && <span style={{ color: '#C0392B', fontSize: '13px', fontWeight: 700 }}>{saveError}</span>}
       </div>
     </div>
   )
@@ -690,6 +700,7 @@ function UsersPanel() {
     setLoading(false)
   }
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { fetchUsers() }, [])
 
   const handleCreate = async () => {

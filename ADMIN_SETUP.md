@@ -10,7 +10,7 @@
 
 ✅ **Secure Authentication** - JWT-based login system with HTTP-only cookies  
 ✅ **Content Management** - Edit sections directly from the dashboard  
-✅ **JSON-based Storage** - Content stored in `.content/` directory  
+✅ **Persistent Storage** - Uses Vercel KV in production, `.content/` locally  
 ✅ **Protected Routes** - Middleware protects admin pages from unauthorized access  
 ✅ **Session Management** - 7-day token expiration for security  
 
@@ -49,6 +49,18 @@ JWT_SECRET=random_32_character_string_here
 Generate a secure JWT secret:
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+### Vercel Storage (Required for Production Saves)
+
+Admin saves are persistent on Vercel only when KV/Redis is configured.
+
+1. Add a Redis/KV integration in Vercel Marketplace
+2. Ensure these environment variables are set:
+
+```bash
+KV_REST_API_URL=...
+KV_REST_API_TOKEN=...
 ```
 
 ## File Structure
@@ -129,7 +141,10 @@ A: Check that `.env.local` has `ADMIN_USERNAME` and `ADMIN_PASSWORD` set correct
 **Q: Admin dashboard shows 401 Unauthorized**  
 A: Your JWT token expired or is invalid. Login again.
 
-**Q: Changes not saving**  
+**Q: Changes not saving on Vercel**  
+A: Add KV/Redis integration and verify `KV_REST_API_URL` and `KV_REST_API_TOKEN` are set.
+
+**Q: Changes not saving locally**  
 A: Ensure `.content/` directory has write permissions. Check browser console for errors.
 
 **Q: Content file corrupted**  

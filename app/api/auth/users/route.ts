@@ -2,12 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
 import { scryptSync, randomBytes, timingSafeEqual } from 'crypto'
-import fs from 'fs'
-import path from 'path'
 import { sendNewUserEmail } from '@/lib/email'
+import { readPersistentJson, writePersistentJson } from '@/lib/persistent-json'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this'
-const USERS_FILE = path.join(process.cwd(), '.content', 'users.json')
+const USERS_KEY = 'users'
 
 interface StoredUser {
   username: string
@@ -17,19 +16,12 @@ interface StoredUser {
   role: string
 }
 
-export function loadUsers(): StoredUser[] {
-  try {
-    if (!fs.existsSync(USERS_FILE)) return []
-    return JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8'))
-  } catch {
-    return []
-  }
+export async function loadUsers(): Promise<StoredUser[]> {
+  return readPersistentJson<StoredUser[]>(USERS_KEY, [])
 }
 
-function saveUsers(users: StoredUser[]) {
-  const dir = path.dirname(USERS_FILE)
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2))
+async function saveUsers(users: StoredUser[]) {
+  await writePersistentJson(USERS_KEY, users)
 }
 
 export function hashPassword(password: string): { hash: string; salt: string } {
@@ -64,7 +56,7 @@ export async function GET() {
   const authUser = await getAuthUser()
   if (!authUser) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 
-  const users = loadUsers()
+  const users = await loadUsers()
   return NextResponse.json(users.map(({ username, email, role }) => ({ username, email, role })))
 }
 
@@ -93,14 +85,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'Password must be at least 6 characters' }, { status: 400 })
   }
 
-  const users = loadUsers()
+  const users = await loadUsers()
   if (users.find((u) => u.username === username)) {
     return NextResponse.json({ message: 'Username already exists' }, { status: 409 })
   }
 
   const { hash, salt } = hashPassword(password)
   users.push({ username, email, passwordHash: hash, salt, role })
-  saveUsers(users)
+  await saveUsers(users)
 
   // Send welcome email if an address was provided
   let emailNote = ''
@@ -131,12 +123,12 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ message: 'Username is required' }, { status: 400 })
   }
 
-  const users = loadUsers()
+  const users = await loadUsers()
   const filtered = users.filter((u) => u.username !== username)
   if (filtered.length === users.length) {
     return NextResponse.json({ message: 'User not found' }, { status: 404 })
   }
 
-  saveUsers(filtered)
+  await saveUsers(filtered)
   return NextResponse.json({ message: 'User deleted' })
 }

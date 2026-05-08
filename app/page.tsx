@@ -19,8 +19,10 @@ import FAQ             from '@/components/sections/FAQ'
 import FinalCTA        from '@/components/sections/FinalCTA'
 import { getHomepageContent } from '@/lib/content-store'
 
-export default function Home() {
-  const content = getHomepageContent()
+export const dynamic = 'force-dynamic'
+
+export default async function Home() {
+  const content = await getHomepageContent()
 
   return (
     <main>

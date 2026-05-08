@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
-import fs from 'fs'
-import path from 'path'
+import { readPersistentJson, writePersistentJson } from '@/lib/persistent-json'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this'
-const SETTINGS_FILE = path.join(process.cwd(), '.content', 'settings.json')
+const SETTINGS_KEY = 'settings'
 
 export interface SiteSettings {
   googleSiteVerification: string
@@ -38,19 +37,13 @@ const DEFAULT_SETTINGS: SiteSettings = {
   siteUrl: '',
 }
 
-export function loadSettings(): SiteSettings {
-  try {
-    if (!fs.existsSync(SETTINGS_FILE)) return { ...DEFAULT_SETTINGS }
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(fs.readFileSync(SETTINGS_FILE, 'utf-8')) }
-  } catch {
-    return { ...DEFAULT_SETTINGS }
-  }
+export async function loadSettings(): Promise<SiteSettings> {
+  const stored = await readPersistentJson<Partial<SiteSettings>>(SETTINGS_KEY, {})
+  return { ...DEFAULT_SETTINGS, ...stored }
 }
 
-function saveSettings(settings: SiteSettings) {
-  const dir = path.dirname(SETTINGS_FILE)
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
-  fs.writeFileSync(SETTINGS_FILE, JSON.stringify(settings, null, 2))
+async function saveSettings(settings: SiteSettings) {
+  await writePersistentJson(SETTINGS_KEY, settings)
 }
 
 async function getAuthUser(): Promise<{ username: string; role: string } | null> {
@@ -67,7 +60,7 @@ async function getAuthUser(): Promise<{ username: string; role: string } | null>
 export async function GET() {
   const authUser = await getAuthUser()
   if (!authUser) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
-  return NextResponse.json(loadSettings())
+  return NextResponse.json(await loadSettings())
 }
 
 export async function POST(request: NextRequest) {
@@ -77,7 +70,7 @@ export async function POST(request: NextRequest) {
   }
 
   const body = await request.json() as Partial<SiteSettings>
-  const current = loadSettings()
+  const current = await loadSettings()
   const toStringValue = (v: unknown, fallback: string) => {
     if (typeof v !== 'string') return fallback
     return v.trim()
@@ -97,6 +90,6 @@ export async function POST(request: NextRequest) {
     siteUrl: toStringValue(body.siteUrl, current.siteUrl),
   }
 
-  saveSettings(updated)
+  await saveSettings(updated)
   return NextResponse.json({ message: 'Settings saved' })
 }

@@ -42,7 +42,7 @@ export default function Testimonials({ content = TESTIMONIALS }: { content?: typ
               <div className="card p-6 flex flex-col h-full bg-brand-cream">
                 <StarRating rating={r.rating} />
                 <blockquote className="mt-4 text-brand-body text-[15px] leading-relaxed flex-1">
-                  "{r.text}"
+                  {`"${r.text}"`}
                 </blockquote>
                 <div className="mt-5 pt-4 border-t border-brand-cream-3 flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-brand-orange/15 flex items-center justify-center text-brand-orange font-bold text-sm">

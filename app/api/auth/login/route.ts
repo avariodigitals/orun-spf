@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       role = 'admin'
     } else {
       // Check stored sub-users
-      const users = loadUsers()
+      const users = await loadUsers()
       const stored = users.find((u) => u.username === username)
       if (!stored || !verifyPassword(password, stored.passwordHash, stored.salt)) {
         return NextResponse.json(
