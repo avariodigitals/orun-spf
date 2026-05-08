@@ -17,23 +17,26 @@ import Testimonials    from '@/components/sections/Testimonials'
 import StoreLocator    from '@/components/sections/StoreLocator'
 import FAQ             from '@/components/sections/FAQ'
 import FinalCTA        from '@/components/sections/FinalCTA'
+import { getHomepageContent } from '@/lib/content-store'
 
 export default function Home() {
+  const content = getHomepageContent()
+
   return (
     <main>
       <Navbar />
 
-      <Hero />           {/* 1. Hero */}
-      <TrustBar />       {/* 2. Trust bar */}
-      <Benefits />       {/* 3. Product Benefits */}
-      <WhyOrun />        {/* 4. Why ORUN / Brand Differentiation */}
-      <Ingredients />    {/* 5. Ingredients — only here, nowhere else */}
-      <Texture />        {/* 6. Texture / Application */}
-      <BeforeAfter />    {/* 7. Before / After */}
-      <Testimonials />   {/* 8. Testimonials */}
-      <StoreLocator />   {/* 9. Store Locator */}
-      <FAQ />            {/* 10. FAQ */}
-      <FinalCTA />       {/* 11. Final CTA */}
+      <Hero content={content.hero} />
+      <TrustBar content={content.trustBar} />
+      <Benefits content={content.benefits} />
+      <WhyOrun content={content.whyOrun} />
+      <Ingredients content={content.ingredients} />
+      <Texture content={content.texture} />
+      <BeforeAfter content={content.beforeAfter} />
+      <Testimonials content={content.testimonials} />
+      <StoreLocator content={content.stores} />
+      <FAQ content={content.faq} />
+      <FinalCTA content={content.finalCta} />
 
       <Footer />
       <FloatingWA />

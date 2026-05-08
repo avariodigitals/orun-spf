@@ -3,7 +3,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection'
 import WAButton from '@/components/ui/WAButton'
 import { FINAL_CTA } from '@/lib/content'
 
-export default function FinalCTA() {
+export default function FinalCTA({ content = FINAL_CTA }: { content?: typeof FINAL_CTA }) {
   return (
     <section
       id="order"
@@ -23,14 +23,14 @@ export default function FinalCTA() {
             className="font-display font-bold text-white whitespace-pre-line leading-tight mb-5"
             style={{ fontSize: 'clamp(40px, 6vw, 72px)' }}
           >
-            {FINAL_CTA.title}
+            {content.title}
           </h2>
           <p className="text-white/70 text-lg max-w-md mx-auto mb-10 leading-relaxed">
-            {FINAL_CTA.sub}
+            {content.sub}
           </p>
 
           <WAButton
-            label={FINAL_CTA.cta}
+            label={content.cta}
             size="lg"
             variant="white"
             className="mx-auto text-brand-orange font-bold shadow-xl hover:shadow-2xl"
@@ -39,12 +39,7 @@ export default function FinalCTA() {
 
         {/* Trust strip */}
         <div className="mt-16 flex flex-wrap justify-center gap-x-8 gap-y-4 text-white/50 text-xs">
-          {[
-            '🛡 High Protection SPF 50+ PA+++',
-            '👁 No White Cast. Ever.',
-            '🪶 Lightweight & Non-Greasy',
-            '💧 Hydrating Formula',
-          ].map((t) => (
+          {content.trustPoints.map((t) => (
             <span key={t} className="flex items-center gap-1.5">{t}</span>
           ))}
         </div>

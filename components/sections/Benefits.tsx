@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Icon from '@/lib/icons'
 import { BENEFITS } from '@/lib/content'
 
-export default function Benefits() {
+export default function Benefits({ content = BENEFITS }: { content?: typeof BENEFITS }) {
   return (
     <section id="benefits" style={{ padding: '5rem 0 6rem', background: '#FEF9F2' }}>
       <div className="container-xl">
@@ -17,15 +17,15 @@ export default function Benefits() {
           transition={{ duration: 0.6 }}
           style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 3rem' }}
         >
-          <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{BENEFITS.tag}</p>
+          <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{content.tag}</p>
           <h2
             className="display-title"
             style={{ fontSize: 'clamp(34px, 5vw, 58px)', marginBottom: '1.25rem', whiteSpace: 'pre-line' }}
           >
-            {BENEFITS.title}
+            {content.title}
           </h2>
           <p style={{ color: '#7A5C3A', fontSize: '1.05rem', lineHeight: 1.8, maxWidth: '520px', margin: '0 auto' }}>
-            {BENEFITS.desc}
+            {content.desc}
           </p>
         </motion.div>
 
@@ -45,7 +45,7 @@ export default function Benefits() {
             transition={{ duration: 0.55, delay: 0.1 }}
             style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}
           >
-            {BENEFITS.list.map((item, i) => (
+            {content.list.map((item, i) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -16 }}
@@ -69,7 +69,7 @@ export default function Benefits() {
             style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}
           >
 
-            {BENEFITS.cards.map((card) => (
+            {content.cards.map((card) => (
               <div
                 key={card.title}
                 style={{

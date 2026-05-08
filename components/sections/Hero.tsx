@@ -1,11 +1,10 @@
 'use client'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import WAButton from '@/components/ui/WAButton'
 import Icon from '@/lib/icons'
 import { HERO } from '@/lib/content'
 
-export default function Hero() {
+export default function Hero({ content = HERO }: { content?: typeof HERO }) {
   return (
     <section
       id="hero"
@@ -53,6 +52,16 @@ export default function Hero() {
           {/* ── Copy ── */}
           <div>
 
+            <motion.p
+              className="label-tag"
+              style={{ marginBottom: '1rem' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.05 }}
+            >
+              {content.badge}
+            </motion.p>
+
             <motion.h1
               style={{
                 fontFamily:  'var(--font-cormorant), Georgia, serif',
@@ -66,25 +75,20 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.1 }}
             >
-              {HERO.lines[0]}
+              {content.lines[0]}
               <br />
-              <em style={{ color: '#C8541F', fontStyle: 'normal' }}>{HERO.lines[1]}</em>
+              <em style={{ color: '#C8541F', fontStyle: 'normal' }}>{content.lines[1]}</em>
               <br />
-              {HERO.lines[2]}
+              {content.lines[2]}
             </motion.h1>
 
             <motion.p
-              style={{ color: '#7A5C3A', fontSize: '1.15rem', lineHeight: 1.7, marginBottom: '2rem' }}
+              style={{ color: '#7A5C3A', fontSize: '1.15rem', lineHeight: 1.7, marginBottom: '2rem', whiteSpace: 'pre-line' }}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.2 }}
             >
-              Made for{' '}
-              <span style={{ color: '#C8541F', fontWeight: 600, fontStyle: 'italic' }}>every</span> sun.
-              <br className="block md:hidden" />
-              <span className="hidden md:inline"> </span>
-              Made for{' '}
-              <span style={{ color: '#C8541F', fontWeight: 600, fontStyle: 'italic' }}>every</span> skin.
+              {content.sub}
             </motion.p>
 
             {/* Icon badges */}
@@ -94,12 +98,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.3 }}
             >
-              {[
-                { icon: 'ShieldCheck', label: 'High Protection', sub: 'UVA/UVB' },
-                { icon: 'EyeOff',      label: 'No White Cast',   sub: 'All skin tones' },
-                { icon: 'Feather',     label: 'Lightweight',     sub: '& Non-greasy' },
-                { icon: 'Droplets',    label: 'Hydrating',       sub: 'Formula' },
-              ].map(({ icon, label, sub }) => (
+              {content.benefits.map(({ icon, label, note }) => (
                 <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', minWidth: '70px' }}>
                   <div style={{
                     width: '52px', height: '52px', borderRadius: '50%',
@@ -111,7 +110,7 @@ export default function Hero() {
                   </div>
                   <div style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: '12px', fontWeight: 700, color: '#1A0E04', margin: 0, lineHeight: 1.3 }}>{label}</p>
-                    <p style={{ fontSize: '11px', color: '#7A5C3A', margin: 0 }}>{sub}</p>
+                    <p style={{ fontSize: '11px', color: '#7A5C3A', margin: 0 }}>{note}</p>
                   </div>
                 </div>
               ))}
@@ -124,8 +123,8 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.4 }}
             >
-              <WAButton size="lg" label={HERO.ctaMain} />
-              <a href="#benefits" className="btn-outline hero-secondary-mobile">{HERO.ctaSub} →</a>
+              <WAButton size="lg" label={content.ctaMain} />
+              <a href="#benefits" className="btn-outline hero-secondary-mobile">{content.ctaSub} →</a>
             </motion.div>
           </div>
 

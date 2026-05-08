@@ -2,8 +2,9 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import WAButton from '@/components/ui/WAButton'
+import { BEFORE_AFTER } from '@/lib/content'
 
-export default function BeforeAfter() {
+export default function BeforeAfter({ content = BEFORE_AFTER }: { content?: typeof BEFORE_AFTER }) {
   return (
     <section id="results" style={{ padding: '5rem 0', background: '#F7EDD8' }}>
       <div className="container-xl">
@@ -16,17 +17,16 @@ export default function BeforeAfter() {
           transition={{ duration: 0.6 }}
           style={{ textAlign: 'center', marginBottom: '3rem' }}
         >
-          <p className="label-tag" style={{ marginBottom: '0.75rem' }}>See the Difference</p>
+          <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{content.tag}</p>
           <h2
             className="display-title"
             style={{ fontSize: 'clamp(32px, 5vw, 56px)', marginBottom: '1rem' }}
           >
-            Real Results.{' '}
-            <em style={{ color: '#C8541F', fontStyle: 'normal' }}>Real Skin.</em>
+            {content.titleTop}{' '}
+            <em style={{ color: '#C8541F', fontStyle: 'normal' }}>{content.titleAccent}</em>
           </h2>
           <p style={{ color: '#7A5C3A', fontSize: '1rem', maxWidth: '480px', margin: '0 auto', lineHeight: 1.75 }}>
-            ORUN SPF 50+ delivers visible improvement in skin protection and tone
-            within weeks of consistent daily use.
+            {content.description}
           </p>
         </motion.div>
 
@@ -62,7 +62,7 @@ export default function BeforeAfter() {
             color: 'white', borderRadius: '9999px', padding: '8px 18px',
             fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
             textTransform: 'uppercase', pointerEvents: 'none',
-          }}>Without</div>
+          }}>{content.withoutLabel}</div>
 
           {/* With label */}
           <div style={{
@@ -71,7 +71,7 @@ export default function BeforeAfter() {
             borderRadius: '9999px', padding: '8px 18px',
             fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em',
             textTransform: 'uppercase', pointerEvents: 'none',
-          }}>With</div>
+          }}>{content.withLabel}</div>
         </motion.div>
 
         {/* CTA block */}
@@ -94,12 +94,12 @@ export default function BeforeAfter() {
           }}
         >
           <p style={{ fontSize: '1.1rem', fontWeight: 700, color: '#1A0E04', marginBottom: '6px', marginTop: 0 }}>
-            Ready to see your own results?
+            {content.ctaHeading}
           </p>
           <p style={{ color: '#7A5C3A', fontSize: '14px', marginBottom: '1.5rem', marginTop: 0, lineHeight: 1.6 }}>
-            Join hundreds of women across Nigeria who have made ORUN SPF their daily essential.
+            {content.ctaBody}
           </p>
-          <WAButton label="Start Your Glow Journey" size="md" />
+          <WAButton label={content.ctaButton} size="md" />
         </motion.div>
 
       </div>

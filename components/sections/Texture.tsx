@@ -2,23 +2,17 @@
 import Image from 'next/image'
 import AnimatedSection from '@/components/ui/AnimatedSection'
 import SectionHeader from '@/components/ui/SectionHeader'
+import { TEXTURE } from '@/lib/content'
 
-const STEPS = [
-  { step: '01', title: 'Cleanse', desc: 'Start with a clean, dry face. Pat gently — do not rub.' },
-  { step: '02', title: 'Apply', desc: 'Dispense a pea-sized amount and spread evenly across face and neck.' },
-  { step: '03', title: 'Blend', desc: 'Massage in circular motions until fully absorbed. No white cast.' },
-  { step: '04', title: 'Reapply', desc: 'Reapply every 2 hours under direct sun exposure for full protection.' },
-]
-
-export default function Texture() {
+export default function Texture({ content = TEXTURE }: { content?: typeof TEXTURE }) {
   return (
     <section id="texture" className="py-20 lg:py-28 bg-[#FEF9F2]">
       <div className="container-xl">
         <AnimatedSection>
           <SectionHeader
-            tag="Feels as good as it works"
-            title={'Lightweight.\nInvisible. Done.'}
-            desc="No greasiness. No white cast. Just clean, invisible protection that lets your skin breathe all day."
+            tag={content.tag}
+            title={content.title}
+            desc={content.desc}
           />
         </AnimatedSection>
 
@@ -26,7 +20,7 @@ export default function Texture() {
 
           {/* Steps */}
           <AnimatedSection direction="left" className="space-y-6">
-            {STEPS.map((s, i) => (
+            {content.steps.map((s) => (
               <div key={s.step} className="flex gap-5 items-start">
                 <div
                   className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-sm"
@@ -69,10 +63,10 @@ export default function Texture() {
                 textAlign: 'center', whiteSpace: 'nowrap',
               }}>
                 <p style={{ fontWeight: 700, color: '#C8541F', fontSize: '13px', margin: 0 }}>
-                  Zero White Cast
+                  {content.badgeTitle}
                 </p>
                 <p style={{ fontSize: '11px', color: '#7A5C3A', margin: '2px 0 0' }}>
-                  Works on all skin tones
+                  {content.badgeSub}
                 </p>
               </div>
             </div>

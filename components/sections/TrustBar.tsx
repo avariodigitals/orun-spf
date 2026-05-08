@@ -1,8 +1,8 @@
 import Icon from '@/lib/icons'
 import { TRUST_BAR } from '@/lib/content'
 
-export default function TrustBar() {
-  const doubled = [...TRUST_BAR, ...TRUST_BAR]
+export default function TrustBar({ content = { items: TRUST_BAR } }: { content?: { items: typeof TRUST_BAR } }) {
+  const doubled = [...content.items, ...content.items]
 
   return (
     <section id="trust" className="bg-[#FEF9F2] border-y border-[var(--color-brand-cream-2)] py-5 overflow-hidden">
@@ -10,7 +10,7 @@ export default function TrustBar() {
       {/* Desktop: static row */}
       <div className="hidden lg:block">
         <div className="container-xl flex items-center justify-between">
-          {TRUST_BAR.map((item, i) => (
+          {content.items.map((item, i) => (
             <div key={i} className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full border-2 border-[var(--color-brand-orange)] flex items-center justify-center shrink-0">
                 <Icon
@@ -24,7 +24,7 @@ export default function TrustBar() {
                 <p className="text-[11px] font-extrabold tracking-widest text-[var(--color-brand-dark)] leading-tight uppercase">{item.label}</p>
                 <p className="text-[10px] font-semibold tracking-wider text-[var(--color-brand-orange)] uppercase">{item.note}</p>
               </div>
-              {i < TRUST_BAR.length - 1 && (
+              {i < content.items.length - 1 && (
                 <div className="w-px h-9 bg-[var(--color-brand-cream-2)] mx-5" />
               )}
             </div>

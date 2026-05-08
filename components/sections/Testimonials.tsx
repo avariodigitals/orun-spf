@@ -8,9 +8,9 @@ import { TESTIMONIALS } from '@/lib/content'
 
 const VISIBLE = 3
 
-export default function Testimonials() {
+export default function Testimonials({ content = TESTIMONIALS }: { content?: typeof TESTIMONIALS }) {
   const [start, setStart] = useState(0)
-  const items = TESTIMONIALS.items
+  const items = content.items
 
   const prev = () => setStart(s => Math.max(0, s - 1))
   const next = () => setStart(s => Math.min(items.length - VISIBLE, s + 1))
@@ -20,7 +20,7 @@ export default function Testimonials() {
       <div className="container-xl">
         <AnimatedSection>
           <div className="flex items-end justify-between">
-            <SectionHeader tag={TESTIMONIALS.tag} title={TESTIMONIALS.title} centered={false} />
+            <SectionHeader tag={content.tag} title={content.title} centered={false} />
             <div className="flex gap-2 mb-4">
               {[prev, next].map((fn, i) => (
                 <button

@@ -4,16 +4,16 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import Icon from '@/lib/icons'
 import { INGREDIENTS } from '@/lib/content'
 
-export default function Ingredients() {
+export default function Ingredients({ content = INGREDIENTS }: { content?: typeof INGREDIENTS }) {
   return (
     <section id="ingredients" className="py-20 lg:py-28 bg-white">
       <div className="container-xl">
         <AnimatedSection>
-          <SectionHeader tag={INGREDIENTS.tag} title={INGREDIENTS.title} />
+          <SectionHeader tag={content.tag} title={content.title} />
         </AnimatedSection>
 
         <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {INGREDIENTS.items.map((item, i) => (
+          {content.items.map((item, i) => (
             <AnimatedSection key={item.name} delay={i * 0.08}>
               <div
                 className="card group p-5 text-center cursor-default"

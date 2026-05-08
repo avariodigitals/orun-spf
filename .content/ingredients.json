@@ -1,0 +1,36 @@
+{
+  "tag": "Clean Ingredients. Powerful Results.",
+  "title": "What's Inside",
+  "items": [
+    {
+      "icon": "Sparkles",
+      "name": "Niacinamidedddddd",
+      "bg": "#F9EFC7",
+      "desc": "Brightens and evens skin tone."
+    },
+    {
+      "icon": "Droplets",
+      "name": "Hyaluronic Acid",
+      "bg": "#C9DEF5",
+      "desc": "Deeply hydrates and plumps."
+    },
+    {
+      "icon": "Leaf",
+      "name": "Vitamin E",
+      "bg": "#F5D9B8",
+      "desc": "Protects and nourishes skin."
+    },
+    {
+      "icon": "Sun",
+      "name": "Advanced UV Filters",
+      "bg": "#E8E8E8",
+      "desc": "Broad spectrum protection."
+    },
+    {
+      "icon": "Wind",
+      "name": "Aloe Vera Extract",
+      "bg": "#C8E6C9",
+      "desc": "Soothes and calms skin."
+    }
+  ]
+}

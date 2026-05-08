@@ -2,27 +2,9 @@
 import Image from 'next/image'
 import { CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { WHY_ORUN } from '@/lib/content'
 
-const POINTS = [
-  {
-    title: 'Made for African Skin',
-    body:  'Formulated specifically for melanin-rich skin tones that are often ignored by mainstream SPF brands.',
-  },
-  {
-    title: 'No White Cast. Guaranteed.',
-    body:  'Our advanced filter blend disappears invisibly on all skin tones — from the lightest to the deepest.',
-  },
-  {
-    title: 'Built for Nigerian Weather',
-    body:  'Tropical-heat tested. Sweat-resistant. Designed to protect under the harshest sun conditions in Africa.',
-  },
-  {
-    title: 'Skincare + Sun Protection',
-    body:  'Niacinamide brightens. Hyaluronic Acid hydrates. You get SPF and a full skincare step in one product.',
-  },
-]
-
-export default function WhyOrun() {
+export default function WhyOrun({ content = WHY_ORUN }: { content?: typeof WHY_ORUN }) {
   return (
     <section id="why-orun" style={{ padding: '5rem 0', background: 'white', overflow: 'hidden' }}>
       <div className="container-xl">
@@ -106,25 +88,23 @@ export default function WhyOrun() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.65, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <p className="label-tag" style={{ marginBottom: '0.75rem' }}>Why Choose ORUN</p>
+            <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{content.tag}</p>
 
             <h2
               className="display-title"
               style={{ fontSize: 'clamp(32px, 4.5vw, 54px)', marginBottom: '1rem', lineHeight: 1.1 }}
             >
-              Protection Made{' '}
-              <em style={{ color: '#C8541F', fontStyle: 'normal' }}>For You.</em>
-              <br />Not Adapted For You.
+              {content.titleTop}{' '}
+              <em style={{ color: '#C8541F', fontStyle: 'normal' }}>{content.titleAccent}</em>
+              <br />{content.titleBottom}
             </h2>
 
             <p style={{ color: '#7A5C3A', fontSize: '1rem', lineHeight: 1.8, marginBottom: '2rem', maxWidth: '480px' }}>
-              Most sunscreens were not formulated with African skin in mind.
-              ORUN was built from the ground up to serve melanin-rich skin — delivering
-              real protection with zero compromise on aesthetics or feel.
+              {content.desc}
             </p>
 
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
-              {POINTS.map((pt) => (
+              {content.points.map((pt) => (
                 <li key={pt.title} style={{ display: 'flex', gap: '0.875rem', alignItems: 'flex-start' }}>
                   <CheckCircle2
                     size={18}

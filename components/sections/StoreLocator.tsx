@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import WAButton from '@/components/ui/WAButton'
 import { STORES } from '@/lib/content'
 
-export default function StoreLocator() {
+export default function StoreLocator({ content = STORES }: { content?: typeof STORES }) {
   return (
     <section id="stores" style={{ padding: '5rem 0 6rem', background: '#FEF9F2' }}>
       <div className="container-xl">
@@ -17,12 +17,12 @@ export default function StoreLocator() {
           transition={{ duration: 0.6 }}
           style={{ textAlign: 'center', marginBottom: '3.5rem' }}
         >
-          <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{STORES.tag}</p>
+          <p className="label-tag" style={{ marginBottom: '0.75rem' }}>{content.tag}</p>
           <h2 className="display-title" style={{ fontSize: 'clamp(32px, 5vw, 54px)', marginBottom: '1rem' }}>
-            {STORES.title}
+            {content.title}
           </h2>
           <p style={{ color: '#7A5C3A', fontSize: '1rem', maxWidth: '500px', margin: '0 auto', lineHeight: 1.75 }}>
-            {STORES.desc}
+            {content.desc}
           </p>
         </motion.div>
 
@@ -33,7 +33,7 @@ export default function StoreLocator() {
           gap:                 '1.25rem',
           marginBottom:        '3rem',
         }}>
-          {STORES.items.map((store, i) => (
+          {content.items.map((store, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 28 }}
@@ -134,12 +134,12 @@ export default function StoreLocator() {
           </div>
 
           <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.3rem', fontWeight: 700, color: '#1A0E04', marginBottom: '6px', marginTop: 0 }}>
-            Not near a stockist?
+            {content.deliveryTitle}
           </h3>
           <p style={{ color: '#7A5C3A', fontSize: '14px', lineHeight: 1.65, marginBottom: '1.5rem', marginTop: 0 }}>
-            Order directly on WhatsApp — fast nationwide delivery across all states in Nigeria.
+            {content.deliveryBody}
           </p>
-          <WAButton label="Order via WhatsApp — We Deliver Nationwide" size="md" />
+          <WAButton label={content.deliveryCta} size="md" />
         </motion.div>
 
       </div>

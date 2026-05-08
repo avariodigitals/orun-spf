@@ -6,7 +6,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import { FAQ_ITEMS } from '@/lib/content'
 import { motion, AnimatePresence } from 'framer-motion'
 
-export default function FAQ() {
+export default function FAQ({ content = FAQ_ITEMS }: { content?: typeof FAQ_ITEMS }) {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
@@ -25,8 +25,8 @@ export default function FAQ() {
           <AnimatedSection direction="right">
             <div style={{ position: 'sticky', top: '7rem' }}>
               <SectionHeader
-                tag={FAQ_ITEMS.tag}
-                title={FAQ_ITEMS.title}
+                tag={content.tag}
+                title={content.title}
                 centered={false}
               />
 
@@ -87,7 +87,7 @@ export default function FAQ() {
 
           {/* ── Accordion ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {FAQ_ITEMS.items.map((item, i) => (
+            {content.items.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.05}>
                 <div
                   style={{
